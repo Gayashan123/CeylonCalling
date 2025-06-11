@@ -24,7 +24,7 @@ const Login = ({ closeLogin }) => {
   style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}
 >
 
-      <div className="sm:mr-5 sm:ml:5 relative w-full max-w-md p-6 transition-all duration-500 ease-in-out transform bg-black rounded-lg shadow-lg shadow-white outline-1 outline-white">
+      <div className="mr-5 sml:5 relative w-full max-w-md p-6 transition-all duration-500 ease-in-out transform bg-black rounded-lg shadow-lg shadow-white outline-1 outline-white">
         {/* Close Button */}
         <button
           className="absolute text-gray-500 top-4 right-4 hover:text-gray-800"

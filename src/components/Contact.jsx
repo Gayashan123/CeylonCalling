@@ -2,7 +2,7 @@
 import Con from '../assets/contact.jpg';
 import { FiPhoneCall, FiSend } from 'react-icons/fi';
 import { HiOutlineMail } from 'react-icons/hi';
-import { MdLocationOn } from 'react-icons/md';
+
 
 function Contact() {
   const contactDetails = [
@@ -20,13 +20,13 @@ function Contact() {
   ];
 
   return (
-    <div className="container py-10 mx-auto bg-blue-50 text-center" id="contact">
+   <div className="border-b-2 border-black  container px-4 py-12 mx-auto bg-blue-50" id="about">
       {/* Header Section */}
-      <div className="w-full px-8 py-10 mt-5 rounded-lg shadow-xl bg-gradient-to-r from-blue-800 via-blue-700 to-teal-600">
-        <h1 className="text-4xl font-extrabold text-white uppercase">Reserve Your Table or Reach Out</h1>
-        <p className="mt-4 text-lg text-white">
-          Whether it’s a question, reservation, or feedback – we’d love to hear from you. Let’s connect and serve you better!
-        </p>
+      <div
+        className="w-full px-8 py-10 mt-5 transition-all duration-300 ease-out transform rounded-lg shadow-2xl outline-4 outline-white shadow-white cursor-pointer bg-gradient-to-r from-blue-800 via-blue-700 to-teal-600 hover:scale-105 hover:shadow-2xl hover:bg-blue-600"
+      >
+        <h1 className="text-3xl text-center font-bold text-white">Contact Us</h1>
+       
       </div>
 
       {/* Contact Details Section */}
@@ -34,7 +34,7 @@ function Contact() {
         {contactDetails.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col items-center p-6 transition duration-300 transform bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-xl"
+            className="flex flex-col items-center p-6 transition duration-300 transform shadow-black bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-xl"
           >
             {item.icon}
             <p className="mt-4 text-lg text-gray-700">{item.label}</p>
@@ -44,9 +44,9 @@ function Contact() {
       </div>
 
       {/* Contact Form Section */}
-      <div className="flex flex-col items-center justify-between gap-12 mt-10 sm:flex-row">
+      <div className="flex   flex-col items-center justify-between gap-12 mt-10 sm:flex-row">
         {/* Image Section */}
-        <div className="w-full sm:w-1/2">
+        <div className="w-full sm:w-1/2 shadow-md shadow-black">
           <img
             src={Con}
             alt="Contact"
@@ -55,7 +55,7 @@ function Contact() {
         </div>
 
         {/* Contact Form */}
-        <div className="flex flex-col w-full max-w-md p-6 bg-white rounded-lg shadow-lg sm:w-1/2 transition duration-300 transform hover:scale-105 hover:shadow-xl">
+        <div className="flex shadow-green-400 flex-col w-full max-w-md p-6 bg-white rounded-lg shadow-lg sm:w-1/2 transition duration-300 transform hover:scale-105 hover:shadow-xl">
           <h3 className="mb-4 text-2xl font-semibold text-gray-800">Get in Touch</h3>
           <p className="mb-6 text-gray-600">
             We value your feedback and bookings. Fill out this form, and we’ll get in touch shortly.

@@ -18,7 +18,7 @@ function Header() {
 
   return (
     <div
-      className="relative flex items-center justify-center w-full min-h-screen overflow-hidden bg-center bg-cover"
+      className="border-b-2 border-black  relative flex items-center justify-center w-full min-h-screen overflow-hidden bg-center bg-cover"
       style={{ backgroundImage: `url(${ximage})` }}
       id="header"
     >
@@ -51,10 +51,10 @@ function Header() {
         <div className="flex gap-4 mt-8">
           {/* Discover Button */}
           <button
-            className="px-6 py-3 font-semibold text-white transition-all transform bg-teal-500 rounded-full shadow-lg hover:bg-teal-400 hover:shadow-xl hover:scale-105"
+            className="px-6 py-3  shadow-yellow-200 font-semibold text-white transition-all transform bg-teal-500 rounded-xl shadow-md hover:bg-teal-400 hover:shadow-xl hover:scale-105"
             onClick={openAppoin}
           >
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 ">
               <FaCompass className="text-xl" />
               Discover
             </div>
@@ -63,11 +63,11 @@ function Header() {
           {/* Contact Me Button with scroll */}
           <Link to="contact" smooth={true} duration={500} spy={true}>
             <button
-              className="px-6 py-3 font-semibold text-white transition-all transform bg-teal-500 rounded-full shadow-lg hover:bg-teal-400 hover:shadow-xl hover:scale-105"
+              className="px-6 py-3 font-semibold text-black outline-2 outline-black shadow-amber-300 transition-all transform bg-white rounded-xl shadow-lg hover:bg-red hover:shadow-xl hover:scale-105"
             >
               <div className="flex items-center gap-3">
                 <FaPhoneAlt className="text-xl" />
-                Contact Me
+                Contact-Us
               </div>
             </button>
           </Link>

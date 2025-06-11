@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-scroll';
 import Login from './Login';
 import Create from './Create';
+import Logo from "../assets/Lion.jpg"
 
 function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,9 +36,10 @@ function Navigation() {
 
   return (
     <div className={`fixed top-0 left-0 z-30 w-full ${lopop || signup ? 'bg-black opacity-[0.73]' : ''}`}>
-      <div className='flex items-center justify-between px-6 py-4 mx-auto bg-white lg:px-20'>
+      <div className='flex items-center justify-between px-6 py-4 mx-auto bg-white  lg:px-20'>
         <div className='flex items-center gap-4'>
-          <p className='font-semibold text-black'>Ceylon Calling</p>
+           <img src={Logo} alt="Hospital Care Logo" className='h-10 mt-0 bg-yellow-400' />
+          <p className='text-xl font-semibold uppercase text-black'>Ceylon Calling</p>
         </div>
 
         <div className='items-center hidden gap-6 ml-auto lg:flex'>

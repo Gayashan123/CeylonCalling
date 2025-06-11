@@ -12,22 +12,20 @@ function About() {
   }, []);
 
   return (
-    <div className="container px-4 py-12 mx-auto bg-blue-50" id="about">
+    <div className="  container px-4 py-12 mx-auto bg-blue-50" id="about">
       {/* Header Section */}
       <div
-        className="w-full px-8 py-10 mt-5 transition-all duration-300 ease-out transform rounded-lg shadow-xl cursor-pointer bg-gradient-to-r from-blue-800 via-blue-700 to-teal-600 hover:scale-105 hover:shadow-2xl hover:bg-blue-600"
+        className="w-full px-8 py-10 mt-5 transition-all duration-300 ease-out transform rounded-lg shadow-2xl outline-2 outline-amber-50 shadow-amber-50 cursor-pointer bg-gradient-to-r from-blue-798 via-blue-700 to-teal-600 hover:scale-105 hover:shadow-2xl hover:bg-blue-600"
       >
         <h1 className="text-3xl text-center font-bold text-white">About Us</h1>
-        <p className="mt-2 text-lg text-center text-gray-200">
-           Discover our passion for authentic flavors, warm hospitality, and unforgettable dining experiences.
-        </p>
+       
       </div>
 
       {/* About Sections */}
       <div className="flex flex-col justify-center gap-8 mt-12 md:flex-row">
         {/* Our Mission */}
         <div
-          className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg"
+          className=" shadow-green-400 flex flex-col items-center p-6 bg-white rounded-lg shadow-sm"
           data-aos="fade-up"
           data-aos-delay="100"
         >
@@ -44,7 +42,7 @@ function About() {
 
         {/* Our Vision */}
         <div
-          className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg"
+          className="flex shadow-green-400 flex-col items-center p-6 bg-white rounded-lg shadow-sm"
           data-aos="fade-up"
           data-aos-delay="300"
         >
@@ -61,7 +59,7 @@ function About() {
 
         {/* Our Story */}
         <div
-          className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg"
+          className="flex shadow-green-400 flex-col items-center p-6 bg-white rounded-lg shadow-sm"
           data-aos="fade-up"
           data-aos-delay="500"
         >
