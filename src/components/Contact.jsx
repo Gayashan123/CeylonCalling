@@ -1,5 +1,5 @@
-import React from 'react';
-import Con from '../assets/Contact.jpg';
+
+import Con from '../assets/contact.jpg';
 import { FiPhoneCall, FiSend } from 'react-icons/fi';
 import { HiOutlineMail } from 'react-icons/hi';
 import { MdLocationOn } from 'react-icons/md';

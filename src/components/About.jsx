@@ -4,7 +4,7 @@ import 'aos/dist/aos.css';
 
 import RestaurantInterior from '../assets/About.jpg';
 import DeliciousFood from '../assets/Mission.jpg';
-import DiningExperience from '../assets/Vision.jpg';
+import DiningExperience from '../assets/vision.jpg';
 
 function About() {
   useEffect(() => {
