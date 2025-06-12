@@ -15,7 +15,7 @@ function Navbar() {
   };
 
   return (
-    <aside className="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-[95%] max-w-md bg-white shadow-xl rounded-2xl px-6 py-4 flex justify-between items-center z-50 border border-gray-200">
+    <aside className="fixed bottom-2 left-1/2 transform -translate-x-1/2 w-[95%] max-w-md bg-white shadow-xl rounded-2xl px-6 py-4 flex justify-between items-center z-50 border border-gray-200">
       {/* Icons Group */}
       <div className="flex justify-between items-center w-full gap-6">
         <FaHome

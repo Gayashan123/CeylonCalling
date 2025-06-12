@@ -11,15 +11,11 @@ const Create = ({ login, closeLogin }) => {
   };
 
   return (
-    <div
-      className="relative inset-0 z-50 flex items-center justify-center min-h-screen bg-black/85"
-      aria-modal="true"
-      role="dialog"
-    >
-      <div className="relative w-full max-w-md mx-4 sm:mx-6 md:mx-0 p-6 sm:p-8 bg-black rounded-lg shadow-xl border border-white/10 transition-all duration-500 ease-in-out">
+    <div className="relative  inset-0 z-50 flex items-center justify-center px-4 py-1 sm:px-6 md:px-10 bg-transparent bg-opacity-85">
+      <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-md xl:max-w-lg bg-black rounded-lg shadow-lg shadow-white p-6 sm:p-8 transition-all duration-500 ease-in-out">
         {/* Close Button */}
         <button
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-200 transition-colors"
+          className="absolute  top-4 right-4 text-gray-400 hover:text-gray-200 transition-colors"
           onClick={closeLogin}
           aria-label="Close modal"
           type="button"
