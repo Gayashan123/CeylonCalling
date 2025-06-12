@@ -4,11 +4,14 @@ import { FiSearch, FiMapPin } from 'react-icons/fi';
 import Login from './Login';
 import Create from './Create';
 import Logo from '../assets/Lion.jpg';
+import { useNavigate } from 'react-router-dom';
 
 function Navigation() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const openLogin = () => {
     setShowLogin(true);
@@ -32,12 +35,16 @@ function Navigation() {
       (position) => {
         const { latitude, longitude } = position.coords;
         alert(`Location detected:\nLatitude: ${latitude}\nLongitude: ${longitude}`);
-        // You can set this in state or call your API with these coords
       },
-      (error) => {
+      () => {
         alert("Failed to get location. Please enable location services.");
       }
     );
+  };
+
+  // Navigate to home or Header component on logo click
+  const goToHeader = () => {
+    navigate('/'); // or any route you want, e.g. '/header'
   };
 
   return (
@@ -48,7 +55,11 @@ function Navigation() {
     >
       <div className="max-w-screen-xl mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo & Title */}
-        <div className="flex items-center gap-3">
+        <div
+          onClick={goToHeader}
+          className="flex items-center gap-3 cursor-pointer select-none"
+          title="Go to Home"
+        >
           <img
             src={Logo}
             alt="Logo"
@@ -59,7 +70,7 @@ function Navigation() {
           </span>
         </div>
 
-        {/* Apple-style Search Input (Hidden on mobile) */}
+        {/* Search Input (Hidden on mobile) */}
         <div className="hidden lg:flex flex-grow justify-center">
           <div className="relative w-full max-w-2xl flex items-center rounded-full bg-white/60 backdrop-blur-md border border-white/40 shadow-sm transition-all">
             <FiSearch className="absolute left-4 text-gray-500 text-lg" />
@@ -105,7 +116,7 @@ function Navigation() {
         </div>
       </div>
 
-      {/* Apple-style Search Input (Mobile) */}
+      {/* Search Input (Mobile) */}
       <div className="block lg:hidden px-4 pb-2">
         <div className="relative w-full flex items-center rounded-full bg-white/60 backdrop-blur-md border border-white/40 shadow-sm transition-all">
           <FiSearch className="absolute left-4 text-gray-500 text-lg" />

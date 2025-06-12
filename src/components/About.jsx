@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-import RestaurantInterior from '../assets/About.jpg';
-import DeliciousFood from '../assets/Mission.jpg';
-import DiningExperience from '../assets/vision.jpg';
+import RestaurantInterior from "../assets/About.jpg";
+import DeliciousFood from "../assets/Mission.jpg";
+import DiningExperience from "../assets/vision.jpg";
 
 function About() {
   useEffect(() => {
@@ -12,71 +12,75 @@ function About() {
   }, []);
 
   return (
-    <div className="  container px-4 py-12 mx-auto bg-blue-50" id="about">
-      {/* Header Section */}
+    <section id="about" className="bg-neutral-100 py-16 px-6 md:px-12">
+      {/* Header */}
       <div
-        className="w-full px-8 py-10 mt-5 transition-all duration-300 ease-out transform rounded-lg shadow-2xl outline-2 outline-amber-50 shadow-amber-50 cursor-pointer bg-gradient-to-r from-blue-798 via-blue-700 to-teal-600 hover:scale-105 hover:shadow-2xl hover:bg-blue-600"
+        className="mb-12 text-center"
+        data-aos="fade-down"
       >
-        <h1 className="text-3xl text-center font-bold text-white">About Us</h1>
-       
+        <h1 className="text-4xl md:text-5xl font-semibold text-neutral-800 tracking-tight">
+          About Us
+        </h1>
+        <p className="mt-4 text-lg text-neutral-500 max-w-xl mx-auto">
+          Learn more about our purpose, goals, and story that inspires everything we do.
+        </p>
       </div>
 
-      {/* About Sections */}
-      <div className="flex flex-col justify-center gap-8 mt-12 md:flex-row">
-        {/* Our Mission */}
+      {/* Content Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        {/* Mission */}
         <div
-          className=" shadow-green-400 flex flex-col items-center p-6 bg-white rounded-lg shadow-sm"
+          className="bg-white/80 backdrop-blur-lg shadow-lg rounded-3xl overflow-hidden p-6 flex flex-col items-center transition-transform hover:scale-[1.03]"
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          <h2 className="mb-4 text-2xl font-semibold text-orange-600">Our Mission</h2>
+          <h2 className="text-2xl font-medium text-teal-700 mb-4">Our Mission</h2>
           <img
             src={DeliciousFood}
-            className="object-cover w-full h-48 mb-4 rounded-lg"
-            alt="Our Mission"
+            alt="Mission"
+            className="w-full h-44 object-cover rounded-xl mb-4"
           />
-          <p className="text-center text-gray-700">
+          <p className="text-center text-neutral-600">
             To serve delicious, freshly prepared dishes that bring people together and create lasting memories.
           </p>
         </div>
 
-        {/* Our Vision */}
+        {/* Vision */}
         <div
-          className="flex shadow-green-400 flex-col items-center p-6 bg-white rounded-lg shadow-sm"
+          className="bg-white/80 backdrop-blur-lg shadow-lg rounded-3xl overflow-hidden p-6 flex flex-col items-center transition-transform hover:scale-[1.03]"
           data-aos="fade-up"
           data-aos-delay="300"
         >
-          <h2 className="mb-4 text-2xl font-semibold text-orange-600">Our Vision</h2>
+          <h2 className="text-2xl font-medium text-teal-700 mb-4">Our Vision</h2>
           <img
             src={DiningExperience}
-            className="object-cover w-full h-48 mb-4 rounded-lg"
-            alt="Our Vision"
+            alt="Vision"
+            className="w-full h-44 object-cover rounded-xl mb-4"
           />
-          <p className="text-center text-gray-700">
+          <p className="text-center text-neutral-600">
             To become the go-to destination for food lovers seeking quality, authenticity, and warm ambiance.
           </p>
         </div>
 
-        {/* Our Story */}
+        {/* Story */}
         <div
-          className="flex shadow-green-400 flex-col items-center p-6 bg-white rounded-lg shadow-sm"
+          className="bg-white/80 backdrop-blur-lg shadow-lg rounded-3xl overflow-hidden p-6 flex flex-col items-center transition-transform hover:scale-[1.03]"
           data-aos="fade-up"
           data-aos-delay="500"
         >
-          <h2 className="mb-4 text-2xl font-semibold text-orange-600">Our Story</h2>
+          <h2 className="text-2xl font-medium text-teal-700 mb-4">Our Story</h2>
           <img
             src={RestaurantInterior}
-            className="object-cover w-full h-48 mb-4 rounded-lg"
-            alt="Our Story"
+            alt="Story"
+            className="w-full h-44 object-cover rounded-xl mb-4"
           />
-          <p className="text-center text-gray-700">
+          <p className="text-center text-neutral-600">
             Born from a love of cooking and culture, we bring traditional recipes to life with a modern twist.
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
 export default About;
- 

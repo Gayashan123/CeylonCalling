@@ -3,72 +3,67 @@ import Navigation from "./Navigation";
 import ximage from "../assets/Hero.jpg";
 import { FaCompass, FaPhoneAlt } from "react-icons/fa";
 import Typewriter from "typewriter-effect";
-import { Link } from "react-scroll"; // ✅ Important import
+import { Link, useNavigate } from "react-router-dom";
 
-function Header() {
+export default function Header() {
   const [appoin, setAppoin] = useState(false);
+  const openAppoin = () => setAppoin(true);
+  const closeAppoinmen = () => setAppoin(false);
 
-  const openAppoin = () => {
-    setAppoin(true);
-  };
+  const navigate = useNavigate();
 
-  const closeAppoinmen = () => {
-    setAppoin(false);
+  const handleDiscoverClick = () => {
+    // Navigate to /home route
+    navigate("/home");
   };
 
   return (
     <div
-      className="border-b-2 border-black  relative flex items-center justify-center w-full min-h-screen overflow-hidden bg-center bg-cover"
-      style={{ backgroundImage: `url(${ximage})` }}
       id="header"
+      className="relative w-full min-h-screen bg-cover bg-center overflow-hidden border-b border-neutral-200"
+      style={{ backgroundImage: `url(${ximage})` }}
     >
-      {/* Dark overlay */}
-      <div className="absolute top-0 left-0 w-full h-full bg-black/60 z-10"></div>
+      {/* Glassmorphic Overlay */}
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm z-10" />
 
       {/* Navigation */}
       <Navigation />
 
-      {/* Centered Content */}
-      <div className="relative z-20 flex flex-col items-center justify-center px-6 pt-24 pb-16 text-center text-white animate-fadeIn">
-        {/* Headline */}
-        <h1 className="text-4xl font-extrabold tracking-wide md:text-6xl drop-shadow-lg">
+      {/* Main Content */}
+      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen text-center px-4 pt-28 md:pt-36 pb-20">
+        {/* Title */}
+        <h1 className="text-white font-bold text-4xl md:text-6xl leading-tight tracking-tight drop-shadow-lg">
           <Typewriter
             options={{
               strings: ["Discover the Best Places to Eat"],
               autoStart: true,
               loop: true,
+              delay: 50,
             }}
           />
         </h1>
 
-        {/* Subheadline */}
-        <p className="mt-4 text-lg italic text-teal-200 md:text-2xl max-w-2xl">
-          Find your favorite food spots around the city with just a few clicks.
-          Explore a variety of cuisines and hidden gems near you.
+        {/* Subtitle */}
+        <p className="mt-6 text-teal-200 text-lg md:text-xl max-w-2xl italic">
+          Find your favorite food spots around the city with just a few clicks. Explore a variety of cuisines and hidden gems near you.
         </p>
 
         {/* Buttons */}
-        <div className="flex gap-4 mt-8">
+        <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
           {/* Discover Button */}
           <button
-            className="px-6 py-3  shadow-yellow-200 font-semibold text-white transition-all transform bg-teal-500 rounded-xl shadow-md hover:bg-teal-400 hover:shadow-xl hover:scale-105"
-            onClick={openAppoin}
+            onClick={handleDiscoverClick}
+            className="group flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white font-medium rounded-full shadow-md hover:bg-white/20 hover:scale-105 hover:shadow-xl transition-all"
           >
-            <div className="flex items-center gap-3 ">
-              <FaCompass className="text-xl" />
-              Discover
-            </div>
+            <FaCompass className="text-xl" />
+            <span>Discover</span>
           </button>
 
-          {/* Contact Me Button with scroll */}
-          <Link to="contact" smooth={true} duration={500} spy={true}>
-            <button
-              className="px-6 py-3 font-semibold text-black outline-2 outline-black shadow-amber-300 transition-all transform bg-white rounded-xl shadow-lg hover:bg-red hover:shadow-xl hover:scale-105"
-            >
-              <div className="flex items-center gap-3">
-                <FaPhoneAlt className="text-xl" />
-                Contact-Us
-              </div>
+          {/* Contact Us Scroll Button */}
+          <Link to="contact" smooth duration={500} spy>
+            <button className="group flex items-center gap-3 px-6 py-3 bg-white text-gray-900 font-medium rounded-full shadow-md hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition-all">
+              <FaPhoneAlt className="text-xl text-gray-800" />
+              <span>Contact Us</span>
             </button>
           </Link>
         </div>
@@ -76,5 +71,3 @@ function Header() {
     </div>
   );
 }
-
-export default Header;
