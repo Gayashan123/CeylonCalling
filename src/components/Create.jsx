@@ -12,23 +12,23 @@ const Create = ({ login, closeLogin }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-70 backdrop-blur-sm"
+      className="relative inset-0 z-50 flex items-center justify-center min-h-screen bg-black/85"
       aria-modal="true"
       role="dialog"
-      aria-labelledby="create-account-title"
     >
-      <div className="relative w-full max-w-md p-8 bg-white rounded-3xl shadow-2xl shadow-gray-900/30 ring-1 ring-gray-300">
+      <div className="relative w-full max-w-md mx-4 sm:mx-6 md:mx-0 p-6 sm:p-8 bg-black rounded-lg shadow-xl border border-white/10 transition-all duration-500 ease-in-out">
         {/* Close Button */}
         <button
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-200 transition-colors"
           onClick={closeLogin}
           aria-label="Close modal"
-          className="absolute top-5 right-5 text-gray-400 hover:text-gray-600 transition"
+          type="button"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={2.5}
+            strokeWidth={2}
             stroke="currentColor"
             className="w-6 h-6"
           >
@@ -36,86 +36,77 @@ const Create = ({ login, closeLogin }) => {
           </svg>
         </button>
 
-        <h2
-          id="create-account-title"
-          className="mb-8 text-3xl font-semibold text-gray-900"
-        >
-          Create Account
-        </h2>
-
-        <form onSubmit={createAccount} className="space-y-6">
-          <div>
-            <label
-              htmlFor="name"
-              className="block mb-2 text-sm font-medium text-gray-700"
-            >
-              User Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your Name"
-              className="block w-full px-4 py-3 text-gray-900 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-              required
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="mobile"
-              className="block mb-2 text-sm font-medium text-gray-700"
-            >
-              Email or Mobile
-            </label>
-            <input
-              type="text"
-              id="mobile"
-              value={mobile}
-              onChange={(e) => setMobile(e.target.value)}
-              placeholder="example@email.com or 07XXXXXXXX"
-              className="block w-full px-4 py-3 text-gray-900 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-              required
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="block w-full px-4 py-3 text-gray-900 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-              required
-              minLength={6}
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full py-3 text-white bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 rounded-xl shadow-lg hover:from-blue-700 hover:to-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-400 transition"
-          >
+        <div className="w-full">
+          <h2 className="mb-6 text-3xl font-semibold text-teal-400 text-center">
             Create Account
-          </button>
-        </form>
-
-        <p className="mt-6 text-center text-gray-600">
-          Already have an account?{" "}
-          <button
-            onClick={login}
-            className="font-semibold text-blue-600 hover:text-blue-800 focus:outline-none focus:underline"
-          >
-            Log in
-          </button>
-        </p>
+          </h2>
+          <form onSubmit={createAccount} className="space-y-4">
+            <div>
+              <label htmlFor="name" className="block text-base font-medium text-white mb-1">
+                User Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                autoComplete="username"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your Name"
+                className="w-full px-3 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="mobile" className="block text-base font-medium text-white mb-1">
+                Email
+              </label>
+              <input
+                type="email"
+                id="mobile"
+                name="email"
+                autoComplete="email"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+                placeholder="your@email.com"
+                className="w-full px-3 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="block text-base font-medium text-white mb-1">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="new-password"
+                autoComplete="new-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="********"
+                className="w-full px-3 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-2 mt-2 text-white bg-teal-600 rounded-lg hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all"
+            >
+              Create Account
+            </button>
+          </form>
+          <div className="mt-6 text-center">
+            <button
+              type="button"
+              className="text-teal-400 hover:underline"
+              onClick={login}
+              tabIndex={0}
+            >
+              Already have an account? Log in
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -19,24 +19,19 @@ const Login = ({ closeLogin }) => {
   };
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-70 backdrop-blur-sm"
-      aria-modal="true"
-      role="dialog"
-      aria-labelledby="login-title"
-    >
-      <div className="relative w-full max-w-md p-8 bg-white rounded-3xl shadow-2xl shadow-gray-900/30 ring-1 ring-gray-300">
+    <div className="relative inset-0 z-50 flex items-center justify-center px-4 py-6 sm:px-6 md:px-10 bg-transparent bg-opacity-85">
+      <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-md xl:max-w-lg bg-black rounded-lg shadow-lg shadow-white p-6 sm:p-8 transition-all duration-500 ease-in-out">
+        
         {/* Close Button */}
         <button
+          className="absolute text-gray-300 top-4 right-4 hover:text-white"
           onClick={closeLogin}
-          aria-label="Close modal"
-          className="absolute top-5 right-5 text-gray-400 hover:text-gray-600 transition"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={2.5}
+            strokeWidth={2}
             stroke="currentColor"
             className="w-6 h-6"
           >
@@ -44,83 +39,70 @@ const Login = ({ closeLogin }) => {
           </svg>
         </button>
 
-        <div className="text-center mb-8">
-          <h1
-            id="login-title"
-            className="text-4xl font-semibold text-gray-900"
-          >
-            Ceylon Calling
-          </h1>
-          <p className="mt-2 text-xl text-gray-600">{text}</p>
+        <div className="text-center mb-4">
+          <h1 className="text-2xl sm:text-3xl font-bold text-teal-500">Ceylon Calling</h1>
+          <p className="mt-1 text-xl sm:text-2xl text-white font-medium">{text}</p>
         </div>
 
-        {/* Login or Create Form */}
         {!isCreating ? (
           <div>
-            <h2 className="mb-6 text-2xl font-semibold text-gray-900">Welcome!</h2>
-            <form>
-              <div className="mb-5">
-                <label
-                  htmlFor="mobile"
-                  className="block mb-2 text-sm font-medium text-gray-700"
-                >
+            <h2 className="mb-5 text-xl sm:text-2xl font-semibold text-white">
+              Welcome!
+            </h2>
+            <form className="space-y-4">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-white">
                   Email
                 </label>
                 <input
                   type="email"
-                  id="mobile"
-                  placeholder="you@example.com"
-                  className="block w-full px-4 py-3 text-gray-900 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                  required
+                  id="email"
+                  placeholder="example@mail.com"
+                  className="mt-1 w-full p-3 text-white bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               </div>
-              <div className="mb-5">
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-700"
-                >
+
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-white">
                   Password
                 </label>
                 <input
                   type="password"
                   id="password"
-                  placeholder="••••••••"
-                  className="block w-full px-4 py-3 text-gray-900 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                  required
+                  placeholder="********"
+                  className="mt-1 w-full p-3 text-white bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               </div>
 
-              {/* Remember Me & Forgot Password */}
-              <div className="flex items-center justify-between mb-6">
-                <label className="flex items-center text-sm text-gray-600">
-                  <input type="checkbox" className="mr-2 rounded border-gray-300 focus:ring-blue-500" />
+              <div className="flex items-center justify-between text-sm text-white">
+                <label className="flex items-center">
+                  <input type="checkbox" className="mr-2" />
                   Remember me
                 </label>
-                <a
-                  href="#"
-                  className="text-sm font-medium text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
-                >
+                <a href="#" className="text-teal-400 hover:underline">
                   Forgot password?
                 </a>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 text-white bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 rounded-xl shadow-lg hover:from-blue-700 hover:to-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-400 transition"
+                className="w-full py-3 font-medium text-white bg-teal-600 rounded-lg hover:bg-teal-700 transition-colors"
               >
-                Log In
+                Login
               </button>
             </form>
 
-            <p className="mt-6 text-center text-gray-600">
-              Don't have an account?{" "}
-              <button
-                onClick={createAcc}
-                className="font-semibold text-blue-600 hover:text-blue-800 focus:outline-none focus:underline"
-              >
-                Create Account
-              </button>
-            </p>
+            <div className="mt-4 text-center">
+              <p className="text-sm text-gray-300">
+                Don’t have an account?{" "}
+                <button
+                  onClick={createAcc}
+                  className="text-teal-400 hover:underline"
+                >
+                  Create one
+                </button>
+              </p>
+            </div>
           </div>
         ) : (
           <Create login={login} />
