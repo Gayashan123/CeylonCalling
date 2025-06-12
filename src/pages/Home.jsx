@@ -5,6 +5,7 @@ import RestaurantCard from "../components/RestaurentCard";
 import SideNavbar from "../components/SideNavbar";
 import { Element } from "react-scroll";
 
+
 function Home() {
   const [categories, setCategories] = useState([]);
   const [selectedType, setSelectedType] = useState("restaurants");
@@ -128,6 +129,7 @@ function Home() {
 
       {/* Side Navbar */}
       <SideNavbar />
+      
     </div>
   );
 }
