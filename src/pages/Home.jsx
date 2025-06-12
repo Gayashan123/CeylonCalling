@@ -3,6 +3,7 @@ import Navigation from "../components/NavigationPage";
 import { FaFilter } from "react-icons/fa";
 import RestaurantCard from "../components/RestaurentCard";
 import SideNavbar from "../components/SideNavbar";
+import { Element } from "react-scroll";
 
 function Home() {
   const [categories, setCategories] = useState([]);
@@ -71,12 +72,13 @@ function Home() {
       </div>
 
       {/* Filter Section */}
+      <Element name="filter">
       <div className="mx-4 mt-6 p-5 bg-white rounded-2xl shadow-green-200 shadow-md">
-        <h3 className="text-lg font-medium text-gray-700 mb-4">
-          Filter by Category & Price
-        </h3>
+    <h3 className="text-lg font-medium text-gray-700 mb-4">
+      Filter by Category & Price
+    </h3>
 
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4" >
           <input
             type="number"
             placeholder="Max Price"
@@ -105,6 +107,7 @@ function Home() {
           ))}
         </div>
       </div>
+      </Element>
 
       {/* Header Section */}
       <div className="mx-4 mt-10 flex justify-between items-center">
