@@ -63,7 +63,7 @@ function Navigation() {
           <img
             src={Logo}
             alt="Logo"
-            className="h-12 w-12 rounded-full object-cover shadow-md"
+            className="h-12 w-12 rounded-full object-cover shadow-teal-200 shadow-md"
           />
           <span className="text-2xl font-extrabold tracking-tight text-gray-900">
             Ceylon Calling

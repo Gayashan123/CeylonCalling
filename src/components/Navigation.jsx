@@ -36,8 +36,14 @@ function Navigation() {
     <div className={`relative top-0 left-0 z-30 w-full ${showLogin || showSignup ? 'bg-black opacity-75' : ''}`}>
       <div className='flex items-center justify-between px-6 py-4 mx-auto bg-white lg:px-20'>
         <div className='flex items-center gap-4'>
-          <img src={Logo} alt="Hospital Care Logo" className='h-10 bg-yellow-400' />
-          <p className='text-xl font-semibold uppercase text-black'>Ceylon Calling</p>
+         <img
+                     src={Logo}
+                     alt="Logo"
+                     className="h-12 w-12 rounded-full object-cover shadow-teal-200 shadow-md"
+                   />
+                   <span className="text-2xl font-extrabold tracking-tight text-gray-900">
+                     Ceylon Calling
+                   </span>
         </div>
 
         {/* Desktop Menu */}
