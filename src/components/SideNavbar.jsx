@@ -7,28 +7,19 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 
-function SideNavbar() {
+function Navbar() {
   return (
-    <aside
-      className="
-        fixed bottom-0 left-0 right-0 lg:fixed lg:top-0 lg:left-0
-        bg-white shadow-md rounded-s
-        flex justify-between items-center px-6 py-5
-        lg:flex-col   lg:h-screen lg:w-20 lg:p-4
-        z-50
-      "
-    >
-      {/* Top Icons */}
-      <div className="flex lg:flex-col items-center space-x-6 lg:space-x-0 lg:space-y-6">
-        <FaHome className="text-2xl text-gray-700 hover:text-purple-600 cursor-pointer" />
-        <FaBell className="text-2xl text-gray-700 hover:text-purple-600 cursor-pointer" />
-        <FaHeart className="text-2xl text-gray-700 hover:text-purple-600 cursor-pointer" />
-        <FaClock className="text-2xl text-gray-700 hover:text-purple-600 cursor-pointer" />
+    <aside className="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-[95%] max-w-md bg-white shadow-xl rounded-2xl px-6 py-4 flex justify-between items-center z-50 border border-gray-200">
+      {/* Icons Group */}
+      <div className="flex justify-between items-center w-full gap-6">
+        <FaHome className="text-xl sm:text-2xl text-gray-500 hover:text-purple-600 transition cursor-pointer" />
+        <FaBell className="text-xl sm:text-2xl text-gray-500 hover:text-purple-600 transition cursor-pointer" />
+        <FaHeart className="text-xl sm:text-2xl text-gray-500 hover:text-purple-600 transition cursor-pointer" />
+        <FaClock className="text-xl sm:text-2xl text-gray-500 hover:text-purple-600 transition cursor-pointer" />
+        <FaCog className="text-xl sm:text-2xl text-gray-500 hover:text-purple-600 transition cursor-pointer" />
       </div>
-
-     
     </aside>
   );
 }
 
-export default SideNavbar;
+export default Navbar;
