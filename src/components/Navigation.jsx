@@ -4,6 +4,8 @@ import Login from './Login';
 import Create from './Create';
 import Logo from "../assets/Lion.jpg";
 
+import {useNavigate } from 'react-router-dom';
+
 function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
@@ -12,6 +14,8 @@ function Navigation() {
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+    const navigate = useNavigate();
 
   const openLogin = () => {
     setShowLogin(true);
@@ -73,9 +77,9 @@ function Navigation() {
             </button>
             <button
               className='px-6 py-2 font-semibold text-gray-800 uppercase bg-red-300 rounded-xl hover:bg-gray-200'
-              onClick={openSignup}
+              onClick={() => navigate("/shop")}
             >
-              Sign in
+              Shop
             </button>
           </div>
         </div>
@@ -126,9 +130,9 @@ function Navigation() {
             </button>
             <button
               className='px-6 py-2 font-semibold text-gray-800 uppercase bg-white rounded-full hover:bg-gray-200'
-              onClick={openSignup}
+              onClick={() => navigate("/shop")}
             >
-              Sign in
+              Shop Login
             </button>
           </div>
         </div>

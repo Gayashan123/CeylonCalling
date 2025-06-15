@@ -12,29 +12,12 @@ const Create = ({ login, closeLogin }) => {
 
   return (
     <div className="relative  inset-0 z-50 flex items-center justify-center px-4 py-1 sm:px-6 md:px-10 bg-transparent bg-opacity-85">
-      <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-md xl:max-w-lg bg-black rounded-lg shadow-lg shadow-white p-6 sm:p-8 transition-all duration-500 ease-in-out">
+     
         {/* Close Button */}
-        <button
-          className="absolute  top-4 right-4 text-gray-400 hover:text-gray-200 transition-colors"
-          onClick={closeLogin}
-          aria-label="Close modal"
-          type="button"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-
+      
         <div className="w-full">
           <h2 className="mb-6 text-3xl font-semibold text-teal-400 text-center">
-            Create Account
+         
           </h2>
           <form onSubmit={createAccount} className="space-y-4">
             <div>
@@ -103,7 +86,7 @@ const Create = ({ login, closeLogin }) => {
             </button>
           </div>
         </div>
-      </div>
+      
     </div>
   );
 };
