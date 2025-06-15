@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-scroll";
 import { HiMenu, HiX } from "react-icons/hi";
-import Logo from "../../assets/lion.jpg"; // ✅ Update path to your logo image
+import Logo from "../../assets/Lion.jpg"; // ✅ Update path to your logo image
+import {useNavigate } from 'react-router-dom';
 
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,6 +12,8 @@ export default function Navigation() {
     { label: "About", to: "about" },
     { label: "Contact", to: "contact" },
   ];
+
+  const navigate = useNavigate();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
