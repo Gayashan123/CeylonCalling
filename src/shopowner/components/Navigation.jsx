@@ -91,7 +91,9 @@ export default function Navigation() {
 
           <div className="mt-6 border-t pt-4 flex justify-between items-center">
             <span className="text-gray-600 font-semibold">Hi, Shop Owner</span>
-            <button className="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition">
+            <button
+               onClick={() => navigate("/")}
+              className="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition">
               Logout
             </button>
           </div>
