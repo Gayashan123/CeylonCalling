@@ -99,7 +99,7 @@ function Navbar({ onOpenSettings, onViewAllFoods }) {
 
         {/* Settings */}
         <button
-          onClick={onOpenSettings}
+          onClick={() => navigate("/settings")}
           className="group relative flex flex-col items-center justify-center gap-1 text-gray-600 hover:text-purple-600 transition cursor-pointer"
           aria-label="Settings"
           type="button"
