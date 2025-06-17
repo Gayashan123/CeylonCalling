@@ -28,13 +28,15 @@ const ShopForm = ({ onClose }) => {
     name: "",
     activeTime: "",
     description: "",
-    categories: "",
     location: "",
     photo: null,
     priceRange: "",
     shopType: "",
     contact: "",
   });
+
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -44,10 +46,49 @@ const ShopForm = ({ onClose }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Shop Data Submitted:", shopData);
-    onClose();
+    setSuccessMessage("");
+    setErrorMessage("");
+
+    const formData = new FormData();
+    Object.entries(shopData).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        formData.append(key, value);
+      }
+    });
+
+    try {
+      const response = await fetch("http://localhost:5000/api/shops", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to create shop.");
+      }
+
+      setSuccessMessage("Shop created successfully!");
+      setShopData({
+        name: "",
+        activeTime: "",
+        description: "",
+        location: "",
+        photo: null,
+        priceRange: "",
+        shopType: "",
+        contact: "",
+      });
+
+      setTimeout(() => {
+        setSuccessMessage("");
+        onClose();
+      }, 1500);
+    } catch (error) {
+      setErrorMessage(error.message || "Something went wrong.");
+    }
   };
 
   return (
@@ -60,13 +101,7 @@ const ShopForm = ({ onClose }) => {
         exit="hidden"
       >
         <motion.div
-          className="
-            relative w-full max-w-xs
-            sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl
-            mx-auto bg-white rounded-2xl shadow-2xl
-            p-2 sm:p-4 md:p-6 border border-gray-100 box-border
-            overflow-y-auto max-h-[90vh] sm:max-h-[80vh]
-          "
+          className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto bg-white rounded-2xl shadow-2xl p-2 sm:p-4 md:p-6 border border-gray-100 box-border overflow-y-auto max-h-[90vh] sm:max-h-[80vh]"
           variants={modalVariants}
           initial="hidden"
           animate="visible"
@@ -85,6 +120,17 @@ const ShopForm = ({ onClose }) => {
             Create Your Shop
           </h2>
 
+          {successMessage && (
+            <div className="mb-3 text-green-700 bg-green-100 border border-green-300 rounded px-3 py-2 text-center text-sm">
+              {successMessage}
+            </div>
+          )}
+          {errorMessage && (
+            <div className="mb-3 text-red-700 bg-red-100 border border-red-300 rounded px-3 py-2 text-center text-sm">
+              {errorMessage}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             {/* Shop Name */}
             <div>
@@ -93,6 +139,7 @@ const ShopForm = ({ onClose }) => {
               </label>
               <input
                 name="name"
+                value={shopData.name}
                 onChange={handleChange}
                 placeholder="Enter your shop name"
                 className="w-full px-2 py-1.5 rounded-lg border border-gray-200 bg-gray-50 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none transition text-xs sm:text-sm"
@@ -108,6 +155,7 @@ const ShopForm = ({ onClose }) => {
                 </label>
                 <input
                   name="activeTime"
+                  value={shopData.activeTime}
                   onChange={handleChange}
                   placeholder="8AM - 10PM"
                   className="w-full px-2 py-1.5 rounded-lg border border-gray-200 bg-gray-50 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none transition text-xs sm:text-sm"
@@ -119,6 +167,7 @@ const ShopForm = ({ onClose }) => {
                 </label>
                 <input
                   name="priceRange"
+                  value={shopData.priceRange}
                   onChange={handleChange}
                   placeholder="Rs.100 - Rs.1500"
                   className="w-full px-2 py-1.5 rounded-lg border border-gray-200 bg-gray-50 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none transition text-xs sm:text-sm"
@@ -133,8 +182,10 @@ const ShopForm = ({ onClose }) => {
               </label>
               <input
                 name="contact"
+                value={shopData.contact}
                 onChange={handleChange}
                 placeholder="+94*******"
+                required
                 className="w-full px-2 py-1.5 rounded-lg border border-gray-200 bg-gray-50 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none transition text-xs sm:text-sm"
               />
             </div>
@@ -165,6 +216,7 @@ const ShopForm = ({ onClose }) => {
               </label>
               <textarea
                 name="description"
+                value={shopData.description}
                 onChange={handleChange}
                 rows={2}
                 placeholder="Brief description"
@@ -179,6 +231,7 @@ const ShopForm = ({ onClose }) => {
               </label>
               <input
                 name="location"
+                value={shopData.location}
                 onChange={handleChange}
                 placeholder="Colombo, Kandy..."
                 className="w-full px-2 py-1.5 rounded-lg border border-gray-200 bg-gray-50 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none transition text-xs sm:text-sm"

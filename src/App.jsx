@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Shop from './shopowner/pages/ShopOwner';
 import MyShop from './shopowner/pages/MyShop';
 import Settings from "./shopowner/pages/Settings";
+import ShopForm from "./shopowner/pages/ShopLogUi";
 
 
 function App() {
@@ -31,6 +32,8 @@ function App() {
          <Route path="/shop" element={<Shop />} />
      <Route path="/myshop" element={<MyShop />} />
  <Route path="/settings" element={<Settings />} />
+  <Route path="/shopform" element={<ShopForm />} />
+
       
       </Routes>
     </Router>

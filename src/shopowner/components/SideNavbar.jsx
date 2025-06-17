@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaHome, FaUtensils, FaCog, FaPlus, FaStore, FaTags } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
-import ShopForm from "./ShopRegister";
+
 import AddFoodItem from "./AddFoodIte";
 import AddCategory from "./AddCategory";
 
@@ -60,17 +60,7 @@ function Navbar({ onOpenSettings, onViewAllFoods }) {
               role="menu"
               aria-label="Add Menu Options"
             >
-              <button
-                onClick={() => {
-                  setShowShopForm(true);
-                  setShowAddMenu(false);
-                }}
-                className="flex items-center gap-2 hover:bg-gray-100 px-3 py-2 rounded-md text-sm text-gray-700 transition"
-                type="button"
-                role="menuitem"
-              >
-                <FaStore /> Add Shop
-              </button>
+              
               <button
                 onClick={() => {
                   setShowAddFood(true);
