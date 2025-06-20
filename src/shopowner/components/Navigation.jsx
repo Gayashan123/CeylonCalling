@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
 import { HiMenu, HiX } from "react-icons/hi";
-import Logo from "../../assets/Lion.jpg"; // ✅ Update path to your logo image
-import {useNavigate } from 'react-router-dom';
+import Logo from "../../assets/Lion.jpg";
+import { useAuthStore } from "../store/authStore";
+import { useNavigate } from "react-router-dom";
 
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -13,15 +14,25 @@ export default function Navigation() {
     { label: "Contact", to: "contact" },
   ];
 
+  const { user, logout, isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
 
+  // Always display the user's name, NOT the shop name
+  const displayName = user?.name || user?.email || "";
+
   const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  const handleLogout = async () => {
+    await logout();
+    setMenuOpen(false);
+    navigate("/login");
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
         {/* Logo and Brand */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate("/")}>
           <img
             src={Logo}
             alt="Logo"
@@ -37,7 +48,7 @@ export default function Navigation() {
           <ul className="flex gap-6 text-gray-700 font-medium text-lg">
             {navLinks.map(({ label, to }) => (
               <li key={to}>
-                <Link
+                <ScrollLink
                   to={to}
                   smooth
                   duration={500}
@@ -46,17 +57,22 @@ export default function Navigation() {
                   className="cursor-pointer hover:text-gray-400 transition-all"
                 >
                   {label}
-                </Link>
+                </ScrollLink>
               </li>
             ))}
           </ul>
 
-          <div className="flex items-center gap-4 ml-8">
-            <span className="text-gray-600 font-semibold">Hi, Shop Owner</span>
-            <button className="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition">
-              Logout
-            </button>
-          </div>
+          {isAuthenticated && (
+            <div className="flex items-center gap-4 ml-8">
+              <span className="text-gray-600 font-semibold">Hi, {displayName}</span>
+              <button
+                onClick={handleLogout}
+                className="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition"
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </nav>
 
         {/* Mobile Hamburger */}
@@ -74,7 +90,7 @@ export default function Navigation() {
           <ul className="flex flex-col gap-4 text-gray-700 font-medium text-lg">
             {navLinks.map(({ label, to }) => (
               <li key={to}>
-                <Link
+                <ScrollLink
                   to={to}
                   smooth
                   duration={500}
@@ -84,19 +100,22 @@ export default function Navigation() {
                   className="block cursor-pointer hover:text-gray-500"
                 >
                   {label}
-                </Link>
+                </ScrollLink>
               </li>
             ))}
           </ul>
 
-          <div className="mt-6 border-t pt-4 flex justify-between items-center">
-            <span className="text-gray-600 font-semibold">Hi, Shop Owner</span>
-            <button
-               onClick={() => navigate("/")}
-              className="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition">
-              Logout
-            </button>
-          </div>
+          {isAuthenticated && (
+            <div className="mt-6 border-t pt-4 flex justify-between items-center">
+              <span className="text-gray-600 font-semibold">Hi, {displayName}</span>
+              <button
+                onClick={handleLogout}
+                className="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition"
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       )}
     </header>

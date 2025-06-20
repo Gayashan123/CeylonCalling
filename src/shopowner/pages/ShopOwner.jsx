@@ -1,22 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import ximage from "../../assets/shopowner.jpg";
 import { FaCompass, FaPhoneAlt } from "react-icons/fa";
 import Typewriter from "typewriter-effect";
 import { motion } from "framer-motion";
 import About from "../../components/About";
 import Contact from "../../components/Contact";
-import Navbar from "../components/Navigation"
-import Sidenav from "../components/SideNavbar"
+import Navbar from "../components/Navigation";
+import Sidenav from "../components/SideNavbar";
+import { useAuthStore } from "../store/authStore";
 
 export default function Shop() {
-  const [appoin, setAppoin] = useState(false);
-  const openAppoin = () => setAppoin(true);
-  const closeAppoinmen = () => setAppoin(false);
+  const { shop, isCheckingAuth, user, isAuthenticated, fetchShop } = useAuthStore();
+
+  // Ensure shop is fetched if not already loaded (for client refreshes)
+  useEffect(() => {
+    if (isAuthenticated && !shop) {
+      fetchShop();
+    }
+  }, [isAuthenticated, shop, fetchShop]);
+
+  // Show loading while checking auth or shop is not loaded
+  if (isCheckingAuth || !shop) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <span className="text-lg text-gray-500">Loading your shop...</span>
+      </div>
+    );
+  }
+
+  const shopName = shop.name || "Your Shop";
 
   return (
     <div className="w-full overflow-hidden">
-<Navbar />
-      
+      <Navbar />
+
       {/* Hero Section */}
       <div
         id="header"
@@ -37,7 +54,10 @@ export default function Shop() {
           >
             <Typewriter
               options={{
-                strings: ["Welcome Back, Shop Owner!", "Manage Your Business Efficiently"],
+                strings: [
+                  `Welcome Back, ${shopName}!`,
+                  `Manage ${shopName} Efficiently`,
+                ],
                 autoStart: true,
                 loop: true,
                 delay: 60,
@@ -63,7 +83,7 @@ export default function Shop() {
             className="mt-10 flex flex-col sm:flex-row items-center gap-4"
           >
             <button
-              onClick={openAppoin}
+              onClick={() => {/* your dashboard logic */}}
               className="bg-white text-black px-6 py-3 rounded-2xl shadow-md hover:shadow-lg transition-all hover:bg-gray-100 font-semibold text-base"
             >
               <FaCompass className="inline mr-2" />
@@ -130,7 +150,7 @@ export default function Shop() {
           <Contact />
         </div>
       </section>
-      
+
       <Sidenav />
     </div>
   );

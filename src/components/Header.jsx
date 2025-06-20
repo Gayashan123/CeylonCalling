@@ -4,6 +4,7 @@ import ximage from "../assets/Hero.jpg";
 import { FaCompass, FaPhoneAlt } from "react-icons/fa";
 import Typewriter from "typewriter-effect";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Header() {
   const [appoin, setAppoin] = useState(false);
@@ -13,7 +14,6 @@ export default function Header() {
   const navigate = useNavigate();
 
   const handleDiscoverClick = () => {
-    // Navigate to /home route
     navigate("/home");
   };
 
@@ -29,8 +29,13 @@ export default function Header() {
       {/* Navigation */}
       <Navigation />
 
-      {/* Main Content */}
-      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen text-center px-4 pt-28 md:pt-36 pb-20">
+      {/* Main Content with animation */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative z-20 flex flex-col items-center justify-center min-h-screen text-center px-4 pt-28 md:pt-36 pb-20"
+      >
         {/* Title */}
         <h1 className="text-white font-bold text-4xl md:text-6xl leading-tight tracking-tight drop-shadow-lg">
           <Typewriter
@@ -60,14 +65,14 @@ export default function Header() {
           </button>
 
           {/* Contact Us Scroll Button */}
-          <Link to="contact" smooth duration={500} spy>
+          <Link to="/contact">
             <button className="group flex items-center gap-3 px-6 py-3 bg-white text-gray-900 font-medium rounded-full shadow-md hover:bg-gray-100 hover:scale-105 hover:shadow-xl transition-all">
               <FaPhoneAlt className="text-xl text-gray-800" />
               <span>Contact Us</span>
             </button>
           </Link>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

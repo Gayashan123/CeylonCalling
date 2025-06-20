@@ -130,7 +130,7 @@ function Navigation() {
             </button>
             <button
               className='px-6 py-2 font-semibold text-gray-800 uppercase bg-white rounded-full hover:bg-gray-200'
-              onClick={() => navigate("/shop")}
+              onClick={() => navigate("/shopform")}
             >
               Shop Login
             </button>

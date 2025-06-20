@@ -1,20 +1,70 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import { useAuthStore } from "./shopowner/store/authStore";
+import { useEffect } from "react";
 
 import Header from "./components/Header";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+
 import Home from "./pages/Home";
-import Shop from './shopowner/pages/ShopOwner';
-import MyShop from './shopowner/pages/MyShop';
+import Shop from "./shopowner/pages/ShopOwner";
+import MyShop from "./shopowner/pages/MyShop";
 import Settings from "./shopowner/pages/Settings";
 import ShopForm from "./shopowner/pages/ShopLogUi";
 
+import SignUpPage from "./shopowner/pages/SignUpPage";
+import LoginPage from "./shopowner/pages/LoginPage";
+import EmailVerificationPage from "./shopowner/pages/EmailVerificationPage";
+import DashboardPage from "./shopowner/pages/ShopOwner";
+import ForgotPasswordPage from "./shopowner/pages/ForgotPasswordPage";
+import ResetPasswordPage from "./shopowner/pages/ResetPasswordPage";
+import ShopCreate from "./shopowner/pages/ShopCreateAcc"
+
+import FloatingShape from "./shopowner/components/FloatingShape";
+import LoadingSpinner from "./shopowner/components/LoadingSpinner";
+
+// Protect routes that require authentication
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated, user } = useAuthStore();
+
+  if (!isAuthenticated) {
+    return <Navigate to='/login' replace />;
+  }
+
+  if (!user?.isVerified) {
+    return <Navigate to='/verify-email' replace />;
+  }
+
+  return children;
+};
+
+// Redirect authenticated users to dashboard
+const RedirectAuthenticatedUser = ({ children }) => {
+  const { isAuthenticated, user } = useAuthStore();
+
+  if (isAuthenticated && user?.isVerified) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  return children;
+};
 
 function App() {
+  const { isCheckingAuth, checkAuth } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  if (isCheckingAuth) return <LoadingSpinner />;
+
   return (
     <Router>
+      <Toaster />
       <Routes>
+        {/* Public Website */}
         <Route
           path="/"
           element={
@@ -23,18 +73,76 @@ function App() {
               <About />
               <Contact />
               <Footer />
-            
             </>
           }
         />
+
+        {/* Landing Page with Login / Signup Buttons */}
         <Route path="/home" element={<Home />} />
 
-         <Route path="/shop" element={<Shop />} />
-     <Route path="/myshop" element={<MyShop />} />
- <Route path="/settings" element={<Settings />} />
-  <Route path="/shopform" element={<ShopForm />} />
+        {/* Shop/Owner Pages */}
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/myshop" element={<MyShop />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/shopform" element={<ShopForm />} />
 
-      
+        {/* Dashboard */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Shop Creation */}
+        <Route
+          path="/shopcreate"
+          element={
+            <ProtectedRoute>
+              <ShopCreate />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Auth routes */}
+        <Route
+          path="/signup"
+          element={
+            <RedirectAuthenticatedUser>
+              <SignUpPage />
+            </RedirectAuthenticatedUser>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RedirectAuthenticatedUser>
+              <LoginPage />
+            </RedirectAuthenticatedUser>
+          }
+        />
+        <Route path="/verify-email" element={<EmailVerificationPage />} />
+        <Route
+          path="/forgot-password"
+          element={
+            <RedirectAuthenticatedUser>
+              <ForgotPasswordPage />
+            </RedirectAuthenticatedUser>
+          }
+        />
+        <Route
+          path="/reset-password/:token"
+          element={
+            <RedirectAuthenticatedUser>
+              <ResetPasswordPage />
+            </RedirectAuthenticatedUser>
+          }
+        />
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );

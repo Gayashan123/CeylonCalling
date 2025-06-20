@@ -72,7 +72,7 @@ function Home() {
               variants={buttonVariants}
               whileHover="hover"
               whileTap="tap"
-              onClick={() => setShowLogin(true)}
+              onClick={() => navigate("/login")}
               className="w-full flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-2xl shadow-sm hover:shadow-lg transition duration-300 ease-in-out"
             >
               <FaSignInAlt /> Shop Login
@@ -82,7 +82,7 @@ function Home() {
               variants={buttonVariants}
               whileHover="hover"
               whileTap="tap"
-              onClick={() => setAdminLog(true)}
+               onClick={() => navigate("/signup")}
               className="w-full flex items-center justify-center gap-3 bg-gray-900 hover:bg-gray-800 text-white py-2.5 rounded-2xl shadow-sm hover:shadow-lg transition duration-300 ease-in-out"
             >
               <FaUserPlus /> Create Shop Account
