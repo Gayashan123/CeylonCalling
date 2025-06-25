@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useAuthStore } from "../../shopowner/store/authStore";
 import { FaEdit, FaSearch } from "react-icons/fa";
 import Navigation from "../../shopowner/components/SideNavbar";
 import { motion } from "framer-motion";
 
-// Helper for shop and food images
 const getDisplayImage = (photo) => {
   if (!photo) return "https://via.placeholder.com/600x300?text=No+Image";
   if (photo.startsWith("http://") || photo.startsWith("https://")) return photo;
@@ -13,7 +13,8 @@ const getDisplayImage = (photo) => {
 };
 
 function MyShop() {
-  const [shop, setShop] = useState(null);
+  const shop = useAuthStore((state) => state.shop);
+  const isLoadingShop = useAuthStore((state) => state.isLoading);
   const [categories, setCategories] = useState([]);
   const [foods, setFoods] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -24,17 +25,15 @@ function MyShop() {
 
   const foodsPerPage = 6;
 
-  // Fetch all data in parallel
   useEffect(() => {
+    if (!shop) return;
     setLoading(true);
     setError("");
     Promise.all([
-      fetch("/api/shops").then((res) => res.json()),
-      fetch("/api/categories").then((res) => res.json()),
-      fetch("/api/food").then((res) => res.json()),
+      fetch("/api/categories/my-shop", { credentials: "include" }).then((res) => res.json()),
+      fetch("/api/food/my-shop", { credentials: "include" }).then((res) => res.json()),
     ])
-      .then(([shopsData, categoriesData, foodsData]) => {
-        setShop(Array.isArray(shopsData) ? shopsData[0] : shopsData);
+      .then(([categoriesData, foodsData]) => {
         setCategories(categoriesData);
         setFoods(foodsData);
         setLoading(false);
@@ -43,9 +42,9 @@ function MyShop() {
         setError("Failed to load data. Please try again.");
         setLoading(false);
       });
-  }, []);
+  }, [shop]);
 
-  if (loading) {
+  if (isLoadingShop || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center text-gray-500">
         Loading shop data...
@@ -63,7 +62,7 @@ function MyShop() {
   const allCategoryNames = Array.from(new Set(categories.map((c) => c.name)));
   const filteredFoods = foods.filter((food) => {
     return (
-      (selectedCategory === "All" || food.category === selectedCategory) &&
+      (selectedCategory === "All" || (food.category && food.category.name === selectedCategory)) &&
       food.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
@@ -176,7 +175,7 @@ function MyShop() {
                 className="rounded-md mb-3 w-full h-36 sm:h-40 object-cover"
               />
               <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-1">{food.name}</h2>
-              <p className="text-gray-500 text-xs sm:text-sm">{food.category}</p>
+              <p className="text-gray-500 text-xs sm:text-sm">{food.category?.name || ""}</p>
               <p className="text-purple-600 font-bold text-lg sm:text-xl mt-2">
                 ${parseFloat(food.price).toFixed(2)}
               </p>
@@ -254,7 +253,7 @@ function MyShop() {
         </div>
       </motion.section>
 
-      {/* Navigation with Fade In */}
+      {/* Navigation */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

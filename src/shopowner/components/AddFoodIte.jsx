@@ -33,7 +33,7 @@ const AddFoodItem = ({ onClose }) => {
 
   useEffect(() => {
     setLoadingCategories(true);
-    fetch("/api/categories")
+    fetch("/api/categories/my-shop", { credentials: "include" })
       .then(res => res.json())
       .then(data => {
         setCategories(data);
@@ -63,7 +63,7 @@ const AddFoodItem = ({ onClose }) => {
     try {
       const formData = new FormData();
       formData.append("name", food.name);
-      formData.append("category", food.category);
+      formData.append("categoryId", food.category); // categoryId is expected on backend
       formData.append("price", food.price);
       if (food.picture) {
         formData.append("picture", food.picture);
@@ -72,6 +72,7 @@ const AddFoodItem = ({ onClose }) => {
       const response = await fetch("/api/food", {
         method: "POST",
         body: formData,
+        credentials: "include",
       });
 
       let data;
@@ -177,7 +178,7 @@ const AddFoodItem = ({ onClose }) => {
                     Select a category
                   </option>
                   {categories.map((cat) => (
-                    <option key={cat._id} value={cat.name}>
+                    <option key={cat._id} value={cat._id}>
                       {cat.name}
                     </option>
                   ))}
